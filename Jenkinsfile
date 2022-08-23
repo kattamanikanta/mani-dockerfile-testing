@@ -1,5 +1,5 @@
-@Library("mylibs") _
-/*pipeline {
+/* @Library("mylibs") _
+pipeline {
   agent any
   tools {
     maven 'maven2'
