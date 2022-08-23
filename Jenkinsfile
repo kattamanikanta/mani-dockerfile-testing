@@ -51,6 +51,7 @@ pipeline {
             type: 'war']
             ],
             credentialsId: 'nexus',
+            groupId: 'in.javahome',
             nexusUrl: '18.222.187.11:8081',
             nexusVersion: 'nexus3',
             protocol: 'http',
@@ -63,7 +64,7 @@ pipeline {
             steps {
                sshagent(['tomcat']) {
               // some block
-              sh 'scp -o StrictHostKeyChecking=no target/*.war ubuntu@172.31.29.16:/opt/apache-tomcat-8.5.82/webapps/mani2.war'
+              sh 'scp -o StrictHostKeyChecking=no target/*.war ubuntu@172.31.29.16:/opt/apache-tomcat-8.5.82/webapps/myweb-0.0.9.war'
                  }
               }
            }
