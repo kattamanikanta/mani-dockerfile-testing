@@ -42,13 +42,6 @@ pipeline {
                sh 'mvn sonar:sonar -Dsonar.host.url=http://3.144.173.142:9000 -Dsonar.login=de3618b88efbd2bb09b6bff3acaaffefd2103c64'
             }
         }
-        stage('tomcat deployment') {
-            steps {
-               sshagent(['tomcat']) {
-              // some block
-              sh 'scp -o StrictHostKeyChecking=no target/*.war ubuntu@172.31.29.16:/opt/apache-tomcat-8.5.82/webapps/myweb-0.0.9.war'
-                 }
-              }
            stage('nexus') {
            steps {
             nexusArtifactUploader artifacts: [
@@ -58,7 +51,7 @@ pipeline {
             type: 'war']
             ],
             credentialsId: 'nexus',
-            groupId: 'in.javahome',
+            groupId: '',
             nexusUrl: '18.222.187.11:8081',
             nexusVersion: 'nexus3',
             protocol: 'http',
@@ -66,6 +59,13 @@ pipeline {
             version: '0.0.9'
             }
         }
+              stage('tomcat deployment') {
+            steps {
+               sshagent(['tomcat']) {
+              // some block
+              sh 'scp -o StrictHostKeyChecking=no target/*.war ubuntu@172.31.29.16:/opt/apache-tomcat-8.5.82/webapps/myweb-0.0.9.war'
+                 }
+              }
            }
         }
    }
